@@ -1,0 +1,96 @@
+ /*
+    |--------------------------------------------------------------------------
+    | Funciones de espacio, fuente, tamaño, padding y margin
+    |--------------------------------------------------------------------------
+    |
+ */
+    $fontSizes: (
+        h1   : rem(36px),
+        h2   : rem(24px),
+        h3   : rem(20px),
+        h4   : rem(16px),
+        h5   : rem(14px),
+        h6   : rem(12px)
+    );
+    @function rem($px) {
+        @return ($px / 16px) * 1rem;
+    }
+
+    @function rem-margin($px) {
+        @return ($px / 12px) * 1rem;
+    }
+
+    @function fontSize($size) {
+        @if map-has-key($fontSizes, $size) {
+        @return map-get($fontSizes,$size)
+        } @else {
+        @error '$size is not valid, valid values are t1, t2, t3, normal, small, smaller';
+        }
+    }
+
+     /*
+        |--------------------------------------------------------------------------
+        | Margin size
+        |--------------------------------------------------------------------------
+        |
+     */
+
+     @function magin-rem($px) {
+        @return ($px / 16px) * 1rem;
+      }
+      $margin-global: (
+        m1   : magin-rem(36px),
+        m2   : magin-rem(24px),
+        m3   : magin-rem(20px),
+        m4   : magin-rem(16px),
+        m5   : magin-rem(14px),
+        m6   : magin-rem(12px),
+        m7   : magin-rem(8px),
+        m8   : magin-rem(6px),
+        m9   : magin-rem(4px),
+        m10  : magin-rem(2px)
+      );
+      
+      
+      
+      @function margin-global($size) {
+        @if map-has-key($margin-global, $size) {
+          @return map-get($margin-global,$size)
+        } @else {
+          @error '$size is not valid, valid values are t1, t2, t3, normal, small, smaller';
+        }
+      }
+
+       /*
+          |--------------------------------------------------------------------------
+          | Padding size
+          |--------------------------------------------------------------------------
+          |
+       */
+
+       @function padding-rem($px) {
+        @return ($px / 16px) * 1rem;
+      }
+      $padding-global: (
+        p0   : padding-rem(40px),
+        p1   : padding-rem(36px),
+        p2   : padding-rem(24px),
+        p3   : padding-rem(20px),
+        p4   : padding-rem(16px),
+        p5   : padding-rem(14px),
+        p6   : padding-rem(12px),
+        p7   : padding-rem(8px),
+        p8   : padding-rem(6px),
+        p9   : padding-rem(4px),
+        p10  : padding-rem(2px)
+      ); 
+      
+      
+      
+      @function padding-global($size) {
+        @if map-has-key($padding-global, $size) {
+          @return map-get($padding-global,$size)
+        } @else {
+          @error '$size is not valid, valid values are t1, t2, t3, normal, small, smaller';
+        }
+      }

@@ -1,0 +1,78 @@
+.style-guide-header {
+  position: fixed;
+  min-width: 240px;
+  height: 100%;
+  padding-bottom: 90px;
+  overflow:  hidden;
+
+  border-right: 1px solid #e9ecef;
+  -ms-overflow-style: -ms-autohiding-scrollbar;
+  background-color: #191c20;
+  border-color: rgba(0,0,0,.2);
+
+}
+
+.style-guide-header .logo {
+  font: 0/0 a;
+  color: transparent;
+  text-shadow: none;
+  background-color: transparent;
+  border: 0;
+  position: relative;
+  display: block;
+  height: 120px;
+  background: url(../img/sg-twilio-lockup.svg) no-repeat 50%;
+  background-size: 140px auto;
+  border-bottom: 1px solid rgba(255,255,255,.05);
+}
+
+.style-guide-header li {
+  border-bottom: 1px solid rgba(255,255,255,.05);
+  
+}
+.style-guide-header .is-active a, .style-guide-header .is-active a:hover {
+  color: #9980fa;
+}
+.style-guide-header a {
+  font-size:13px;
+  position: relative;
+  display: block;
+
+  color: #546b81;
+  color: rgba(255,255,255,.8);
+}
+
+.style-guide-header .child {
+  display: none;
+  padding: 6px 0;
+  background-color: #252525;
+  width: 100%;
+    border-bottom: 0;
+    border-top: 0;
+
+  border-top: 1px solid #e9ecef;
+}
+
+.main-font-h2{
+  color: rgba(255, 255, 255, 0.8);
+}
+.style-guide-component {
+  padding-bottom: 90px;
+  border-bottom: 1px solid #e9ecef;
+}
+
+.style-guide-component h1, .style-guide-component h2 {
+  padding-top: 90px;
+}
+.code-container, .dark-mode .code-container {
+  position: relative;
+}
+.component-text{
+  color: rgba(255, 255, 255, 0.8);
+}
+.style-guide-container{
+  background-color: #25282c;
+}
+.wrapper-barba{
+
+}

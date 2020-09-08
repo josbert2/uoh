@@ -1,0 +1,166 @@
+$grid-padding: 10px;
+$grid-column-count: 12;
+$grid-flex-count: 10;
+$grid-breakpoints: (
+    xs: 30em,
+    sm: 48em,
+    md: 64em,
+    lg: 75em
+);
+$grid-fixed-width: (
+    10px: 10px,
+    20px: 20px,
+    30px: 30px,
+    40px: 40px,
+    50px: 50px,
+    60px: 60px,
+    70px: 70px,
+    80px: 80px,
+    90px: 90px,
+    100px: 100px,
+    110px: 110px,
+    120px: 120px,
+    130px: 130px,
+    140px: 140px,
+    150px: 150px,
+    160px: 160px,
+    170px: 170px,
+    180px: 180px,
+    190px: 190px,
+    200px: 200px
+);
+
+@mixin make-grid-shared($padding: $grid-padding) {
+    [class*="col-"] {
+        position: relative;
+        overflow: hidden;
+        white-space: nowrap;
+        text-overflow: ellipsis;
+        -webkit-box-sizing: border-box;
+        -moz-box-sizing: border-box;
+        box-sizing: border-box;
+        @include flex(0 0 100%);
+        padding-right: $padding;
+        padding-left: $padding;
+        min-height: 1px;
+
+        &.reverse {
+            @include flex-direction(column-reverse)
+        }
+    }
+
+    .row {
+        -webkit-box-sizing: border-box;
+        -moz-box-sizing: border-box;
+        box-sizing: border-box;
+        @include flexbox;
+        @include flex(0 1 auto);
+        @include flex-direction(row);
+        @include flex-wrap(wrap);
+        margin-right: -1 * $padding;
+        margin-left: -1 * $padding;
+
+        &.reverse {
+            @include flex-direction(row-reverse)
+        }
+    }
+
+    .col-overflow {
+        overflow: visible;
+    }
+
+    .col-auto {
+      @include flex(1);
+    }
+
+    .col-right {
+        text-align: right;
+    }
+
+    .col-center {
+        text-align: center;
+    }
+
+    .col-align-middle {
+        @include align-self(center);
+    }
+    .col-align-start {
+        @include align-self(flex-start);
+    }
+    .col-align-end {
+        @include align-self(flex-end);
+    }
+}
+
+@mixin make-grid-fixed($fixed, $padding) {
+    @each $fixkey in map-keys($fixed) {
+        $fixval: map-get($fixed, $fixkey);
+        .col-#{$fixkey} {
+            @include flex-basis($fixval + 2 * $padding);
+            max-width: $fixval + 2 * $padding;
+        }
+    }
+}
+
+@mixin make-flex-columns($flex-count) {
+    // Non-responsize flexible columns (takes x space): .col-1, .col-2, .col-offset-1, ...
+    @for $i from 1 through $flex-count {
+        .col-#{$i} {
+            @include flex($i);
+        }
+    }
+}
+
+@mixin make-grid-columns($column-count, $breakpoints) {
+    // Non-responsize columns: .col-all-1, .col-all-2, .col-all-offset-1, ...
+    @for $i from 1 through $column-count {
+        .col-all-#{$i} {
+            @include flex-basis(percentage($i / $column-count));
+            max-width: percentage($i / $column-count);
+            // @include flex(0 0 percentage($i / $column-count));
+        }
+        .col-all-offset-#{$i} {
+            margin-left: percentage($i / $column-count);
+        }
+    }
+    // Responsize columns: .col-xs-1, .col-md-2, .col-md-offset-1, ...
+    @each $breakpoint in map-keys($breakpoints) {
+        $bp: map-get($breakpoints, $breakpoint);
+        @media only screen and (min-width: $bp) {
+            @for $i from 1 through $column-count {
+                .col-#{$breakpoint}-#{$i} {
+                    @include flex-basis(percentage($i / $column-count));
+                    max-width: percentage($i / $column-count);
+                    // @include flex(0 0 percentage($i / $column-count));
+                }
+                .col-#{$breakpoint}-offset-#{$i} {
+                    margin-left: percentage($i / $column-count);
+                }
+            }
+        }
+    }
+}
+
+@mixin make-show-hide($breakpoints) {
+    @each $breakpoint in map-keys($breakpoints) {
+        $bp: map-get($breakpoints, $breakpoint);
+        @media only screen and (min-width: $bp) {
+            .hide-#{$breakpoint} {
+                display: none;
+            }
+        }
+        @media only screen and (max-width: $bp) {
+            .show-#{$breakpoint} {
+                display: none;
+            }
+        }
+    }
+}
+
+@mixin make-gridflexbox($padding: $grid-padding, $column-count: $grid-column-count, $flex-count: $grid-flex-count, $breakpoints: $grid-breakpoints, $fixed-width: $grid-fixed-width){
+    @include make-grid-shared($padding);
+    @include make-grid-fixed($fixed-width, $padding);
+    @include make-grid-columns($column-count, $breakpoints);
+    @include make-flex-columns($flex-count);
+    @include make-show-hide($breakpoints);
+}
